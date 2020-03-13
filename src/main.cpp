@@ -23,10 +23,11 @@ int main (int argc,	char* argv[]){
 	polynomial prueba(firstLength);
 	polynomial prueba2(secondLength);
 
-	 punterillo = new classicalProduct();
+	 punterillo = new classicalProduct;
 
 	try {
-//		punterillo->polynomialProduct(prueba,prueba2);
+		punterillo->polynomialProduct(prueba,prueba2);
+    std::cout << prueba << "\n" << prueba2 << "\n";
 	} catch (char const *e) {
 	}
 

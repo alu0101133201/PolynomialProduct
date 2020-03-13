@@ -11,17 +11,6 @@
 
 class product {	
 	public:
-		product();
-		~product();
-
 		virtual	polynomial polynomialProduct(polynomial& firstPol, polynomial& secondPol) = 0;
 };
 
-class classicalProduct : public product {
-public:
-	classicalProduct();
-	~classicalProduct();
-
-	polynomial polynomialProduct(polynomial& firstPol, polynomial& secondPol);
-
-};

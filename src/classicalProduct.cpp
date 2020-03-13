@@ -6,11 +6,6 @@
 
 #include "classicalProduct.hpp"
 
-classicalProduct::classicalProduct():
- product::product() {}
-
-classicalProduct::~classicalProduct(){}
-
 polynomial classicalProduct::polynomialProduct(polynomial& firstPol, polynomial& secondPol) {
 	polynomial prueba;
 	std::cout << "En el producto clásico\n";
