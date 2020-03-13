@@ -3,6 +3,7 @@
  * Práctica 05 - Diseño y Análisis de Algoritmos
  * Universidad de La Laguna
  */
+#pragma once
 
 #include <iostream>
 

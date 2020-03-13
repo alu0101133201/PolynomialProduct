@@ -6,13 +6,15 @@ ODIR=../src
 
 .PHONY: all
 
-_OBJ = monomial.o main.o
+_OBJ = polynomial.o monomial.o main.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 all: polynomials
 
 
+$(ODIR)/polynomial.o: $(ODIR)/polynomial.cpp $(IDIR)/polynomial.hpp $(IDIR)/monomial.hpp
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/monomial.o: $(ODIR)/monomial.cpp $(IDIR)/monomial.hpp
 	$(CC) -c -o $@ $< $(CFLAGS)

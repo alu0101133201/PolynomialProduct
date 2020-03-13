@@ -38,7 +38,7 @@ void monomial::setExponent(int e) {
 }
 
 std::ostream& operator<<(std::ostream &os, const monomial &s) {
-	os << s.getCoeficient() << "x^" << s.getExponent() << "\n";
+	os << s.getCoeficient() << "x^" << s.getExponent();
 	return os;
 }
 
