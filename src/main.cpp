@@ -16,28 +16,9 @@ int main (int argc,	char* argv[]){
 
 	int firstLength = atoi(argv[1]);
 	int secondLength = atoi(argv[2]);
-	std::vector<monomial> firstPolynomCoef;
-	std::vector<monomial> secondPolynomCoef;
 
-	srand(time(NULL));
-	
-	for (int i = 0; i < firstLength; i++) {
-		int randomNumber = rand()%10;
-		monomial aux(randomNumber,i);
-		firstPolynomCoef.push_back(aux);
-	}
-
-	std::cout << "\n";
-	for (int i = 0; i < secondLength; i++) {
-		int randomNumber = rand()%10;
-		monomial aux(randomNumber,i);
-		secondPolynomCoef.push_back(aux);
-	}
-	std::cout << "\n";
-
-
-	polynomial prueba(firstPolynomCoef);
-	polynomial prueba2(secondPolynomCoef);
+	polynomial prueba(firstLength);
+	polynomial prueba2(secondLength);
 
 
 	try {

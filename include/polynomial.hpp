@@ -20,7 +20,7 @@ class polynomial {
 
 	public:
 		polynomial();
-		polynomial(std::vector<monomial> monoms);
+		polynomial(int);
 		~polynomial();
 
 		int getGrade() const;

@@ -6,10 +6,19 @@
 
 #include "polynomial.hpp"
 
+#include <stdlib.h>
+#include <time.h>
+
 polynomial::polynomial() {}
 
-polynomial::polynomial(std::vector<monomial> monoms):
-		monomials(monoms) {
+polynomial::polynomial(int size){
+
+	srand(time(NULL));
+	for (int i = 0; i < size; i++) {
+		int randomNumber = rand()%10;
+		monomial monomialAux(randomNumber,i);
+		monomials.push_back(monomialAux);
+	}	
 	build();
 }
 
