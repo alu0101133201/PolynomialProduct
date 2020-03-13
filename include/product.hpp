@@ -9,8 +9,19 @@
 
 #include "polynomial.hpp"
 
-class product {
+class product {	
 	public:
-		polynomialProduct(polynomial& firstPol, polynomial& secondPol) = 0;
+		product();
+		~product();
+
+		virtual	polynomial polynomialProduct(polynomial& firstPol, polynomial& secondPol) = 0;
 };
 
+class classicalProduct : public product {
+public:
+	classicalProduct();
+	~classicalProduct();
+
+	polynomial polynomialProduct(polynomial& firstPol, polynomial& secondPol);
+
+};

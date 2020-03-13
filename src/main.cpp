@@ -1,5 +1,7 @@
 #include "monomial.hpp"
 #include "polynomial.hpp"
+#include "product.hpp"
+#include "classicalProduct.hpp"
 
 #include <iostream>
 #include <stdlib.h>
@@ -17,14 +19,14 @@ int main (int argc,	char* argv[]){
 	int firstLength = atoi(argv[1]);
 	int secondLength = atoi(argv[2]);
 
+	product* punterillo;
 	polynomial prueba(firstLength);
 	polynomial prueba2(secondLength);
 
+	 punterillo = new classicalProduct();
 
 	try {
-		std::cout << prueba << "\n";
-		std::cout << prueba2 << "\n";
-
+//		punterillo->polynomialProduct(prueba,prueba2);
 	} catch (char const *e) {
 	}
 
