@@ -16,7 +16,26 @@ polynomial::polynomial(std::vector<monomial> monoms):
 polynomial::~polynomial() {}
 
 void polynomial::build(void) {
-//	std::cout << "En el build\n";
+	terms = 0;
+
+	for (int i = 0; i < monomials.size(); i++) {
+		if (monomials[i].getCoeficient() != 0)
+			terms++;
+	}
+	for (int i = monomials.size() - 1; i >= 0; i--){
+		if(monomials[i].getCoeficient() != 0) {
+			grade = i;
+			break;
+		}
+	}
+}
+
+int polynomial::getGrade() const{
+	return grade;
+}
+
+int polynomial::getTerms() const{
+	return terms;
 }
 
 std::vector<monomial> polynomial::getMonomials(void) const {
@@ -24,9 +43,10 @@ std::vector<monomial> polynomial::getMonomials(void) const {
 }
 
 std::ostream& operator<<(std::ostream &os, const polynomial &s) {
-	for (int i = 0; i < s.getMonomials().size(); i++) {
+	os << "Polinomio de " << s.getTerms() << " términos y de grado " << s.getGrade() << "\n";
+	for (int i = s.getMonomials().size() - 1; i >= 0; i--) {
 		os << s.getMonomials()[i];
-		if (i != (s.getMonomials().size() -1))
+		if (i != 0)
 			os << " + ";
 	}
 	return os;

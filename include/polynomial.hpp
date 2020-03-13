@@ -23,6 +23,8 @@ class polynomial {
 		polynomial(std::vector<monomial> monoms);
 		~polynomial();
 
+		int getGrade() const;
+		int getTerms() const;
 		std::vector<monomial> getMonomials(void) const;
 
 };

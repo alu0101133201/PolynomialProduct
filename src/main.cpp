@@ -22,14 +22,14 @@ int main (int argc,	char* argv[]){
 	srand(time(NULL));
 	
 	for (int i = 0; i < firstLength; i++) {
-		int randomNumber = rand()%20;
+		int randomNumber = rand()%10;
 		monomial aux(randomNumber,i);
 		firstPolynomCoef.push_back(aux);
 	}
 
 	std::cout << "\n";
 	for (int i = 0; i < secondLength; i++) {
-		int randomNumber = rand()%20;
+		int randomNumber = rand()%10;
 		monomial aux(randomNumber,i);
 		secondPolynomCoef.push_back(aux);
 	}
