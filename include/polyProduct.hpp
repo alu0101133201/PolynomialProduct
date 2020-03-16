@@ -24,5 +24,5 @@
 
         void setStrategy(int);
 
-        polynomial multiply(const polynomial& firstPol, const polynomial& secondPol);
+        polynomial multiply(polynomial& firstPol, polynomial& secondPol);
  };

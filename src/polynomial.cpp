@@ -89,11 +89,11 @@ void polynomial::extend(int toAdd) {
 	}
 }
 
-std::vector<monomial> polynomial::getMonomials(void) const {
+std::vector<monomial>& polynomial::getMonomials(void) {
 	return monomials;
 }
 
-std::ostream& operator<<(std::ostream &os, const polynomial &s) {
+std::ostream& operator<<(std::ostream &os, polynomial &s) {
 	os << "Polinomio de " << s.getTerms() << " términos y de grado " << s.getGrade() << "\n";
 	for (int i = s.getMonomials().size() - 1; i >= 0; i--) {
 		os << s.getMonomials()[i];

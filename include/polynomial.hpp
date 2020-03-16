@@ -32,11 +32,11 @@ class polynomial {
 		std::pair<polynomial, polynomial> divide(void) const;
 		void extend(int);
 
-		std::vector<monomial> getMonomials(void) const;
+		std::vector<monomial>& getMonomials(void);
 
 };
 
-std::ostream& operator<<(std::ostream &os, const polynomial &s);
+std::ostream& operator<<(std::ostream &os,  polynomial &s);
 polynomial operator+(polynomial& firstPol, polynomial& secondPol);
 polynomial operator-(polynomial& firstPol, polynomial& secondPol);
 polynomial operator*(polynomial& firstPol, int exp);

@@ -14,6 +14,15 @@
 #define CLASICAL 1
 #define DYV 2
 
+// Función que verifica si los resultados son iguales
+bool equalPoli(polynomial& firstPol, polynomial& secondPol){
+	for (int i = 0; i < firstPol.getTerms(); i++) {
+		if (firstPol.getMonomials()[i].getCoeficient() != secondPol.getMonomials()[i].getCoeficient())
+			return false;
+	}
+	return true;
+}
+
 int main (int argc,	char* argv[]){
 
 	if (argc < 2) {
@@ -25,6 +34,8 @@ int main (int argc,	char* argv[]){
 	srand(time(NULL));
 	polynomial polinomio1(length);
 	polynomial polinomio2(length);
+	polynomial result1;
+	polynomial result2;
 	
 	polyProduct context;
 
@@ -32,7 +43,7 @@ int main (int argc,	char* argv[]){
 	try {
 		context.setStrategy(CLASICAL);
 		auto t1 = std::chrono::high_resolution_clock::now();
-		context.multiply(polinomio1, polinomio2);
+		result1 = context.multiply(polinomio1, polinomio2);
 		auto t2 = std::chrono::high_resolution_clock::now();
 
 		auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
@@ -40,11 +51,15 @@ int main (int argc,	char* argv[]){
 
 		context.setStrategy(DYV);
 		t1 = std::chrono::high_resolution_clock::now();
-		context.multiply(polinomio1, polinomio2);
+		result2 = context.multiply(polinomio1, polinomio2);
 		t2 = std::chrono::high_resolution_clock::now();
 
 		duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
 		std::cout << "Tiempo del producto DyV: " << (duration / 1000) << " mseg\n";
+
+		if (equalPoli(result1, result2))
+			std::cout << "\nLa función de comprobación ha verificado los resultados\n";
+		
 	} catch (char const *e) {
 	}
 

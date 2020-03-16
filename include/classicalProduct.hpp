@@ -13,6 +13,6 @@
 class classicalProduct : public product {
  public:
 
- 	polynomial polynomialProduct(const polynomial& firstPol, const polynomial& secondPol);
+ 	polynomial polynomialProduct(polynomial& firstPol, polynomial& secondPol);
 
 };

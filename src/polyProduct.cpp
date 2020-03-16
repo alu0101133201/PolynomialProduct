@@ -17,12 +17,11 @@ void polyProduct::setStrategy(int opt) {
         prodPointer = new classicalProduct;
     }
     else {
-        prodPointer = new dyVProduct;
-
+      //  prodPointer = new dyVProduct;
     }
 
 }
 
-polynomial polyProduct::multiply(const polynomial& firstPol, const polynomial& secondPol) {
+polynomial polyProduct::multiply(polynomial& firstPol, polynomial& secondPol) {
     return(prodPointer->polynomialProduct(firstPol, secondPol));
 }

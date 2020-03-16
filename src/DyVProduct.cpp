@@ -6,7 +6,7 @@
 
 #include "DyVProduct.hpp"
 
-polynomial dyVProduct::polynomialProduct(const polynomial& firstPol, const polynomial& secondPol) {
+polynomial dyVProduct::polynomialProduct(polynomial& firstPol, polynomial& secondPol) {
 	if ((firstPol.getTerms() == 1) && (secondPol.getTerms() == 1)) {
 		std::vector<int> coeficiente(1);
 		coeficiente[0] = (firstPol.getMonomials()[0].getCoeficient() *
@@ -28,7 +28,9 @@ polynomial dyVProduct::polynomialProduct(const polynomial& firstPol, const polyn
 		polynomial qhx = qx.second;
 
 		polynomial rl = polynomialProduct(plx, qlx);
-		polynomial rm = polynomialProduct((plx + phx), (qlx + qhx));
+		polynomial aux1 = (plx + phx);
+		polynomial aux2 = (qlx + qhx);
+		polynomial rm = polynomialProduct(aux1, aux2);
 		polynomial rh = polynomialProduct(phx, qhx);
 
 		rm = (rm - rl);

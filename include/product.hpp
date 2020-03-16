@@ -11,6 +11,6 @@
 
 class product {	
 	public:
-		virtual	polynomial polynomialProduct(const polynomial& firstPol, const polynomial& secondPol) = 0;
+		virtual	polynomial polynomialProduct(polynomial& firstPol, polynomial& secondPol) = 0;
 };
 
