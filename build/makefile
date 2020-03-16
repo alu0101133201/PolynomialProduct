@@ -6,12 +6,14 @@ ODIR=../src
 
 .PHONY: all
 
-_OBJ = dyVProduct.o classicalProduct.o polynomial.o monomial.o main.o
+_OBJ = polyProduct.o dyVProduct.o classicalProduct.o polynomial.o monomial.o main.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 all: polynomials
 
+$(ODIR)/polyProduct.o: $(ODIR)/polyProduct.cpp $(IDIR)/polyProduct.hpp $(IDIR)/product.hpp $(IDIR)/polynomial.hpp $(IDIR)/monomial.hpp
+		$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/dyVProduct.o: $(ODIR)/DyVProduct.cpp $(IDIR)/DyVProduct.hpp $(IDIR)/product.hpp $(IDIR)/polynomial.hpp $(IDIR)/monomial.hpp
 		$(CC) -c -o $@ $< $(CFLAGS)
