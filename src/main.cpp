@@ -2,6 +2,7 @@
 #include "polynomial.hpp"
 #include "product.hpp"
 #include "classicalProduct.hpp"
+#include "DyVProduct.hpp"
 
 #include <iostream>
 #include <stdlib.h>
@@ -10,24 +11,30 @@
 
 int main (int argc,	char* argv[]){
 
-	if (argc < 3) {
-		std::cout << "Número de parámetros incorrecto. Introduzca dos números\n";
-		std::cout << "./polynomials <number> <number>\n";
+	if (argc < 2) {
+		std::cout << "Número de parámetros incorrecto. Introduzca un tamaño\n";
+		std::cout << "./polynomials <number>\n";
 		return 1;
 	}
+	int length = atoi(argv[1]);
+	srand(time(NULL));
 
-	int firstLength = atoi(argv[1]);
-	int secondLength = atoi(argv[2]);
-
+	polynomial prueba(length);
+	polynomial prueba2(length);
 	product* punterillo;
-	polynomial prueba(firstLength);
-	polynomial prueba2(secondLength);
-
-	 punterillo = new classicalProduct;
 
 	try {
-		punterillo->polynomialProduct(prueba,prueba2);
-    std::cout << prueba << "\n" << prueba2 << "\n";
+		std::cout << prueba << "\n";
+		
+	
+
+
+		//punterillo = new classicalProduct;
+		//std::cout << punterillo->polynomialProduct(prueba,prueba2) << "\n";
+		//punterillo = new dyVProduct;
+		//punterillo->polynomialProduct(prueba,prueba2);
+
+
 	} catch (char const *e) {
 	}
 

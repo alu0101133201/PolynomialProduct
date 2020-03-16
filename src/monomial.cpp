@@ -62,3 +62,10 @@ monomial operator+(const monomial &x, const monomial &y) {
 		return result;		
 	}
 }
+
+monomial operator*(const monomial &x, const monomial &y) {
+	int coeficient = x.getCoeficient() * y.getCoeficient();
+	int exponent = x.getExponent() + y.getExponent();
+	monomial resultado(coeficient, exponent);
+	return resultado;
+}

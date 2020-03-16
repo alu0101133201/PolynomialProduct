@@ -13,7 +13,6 @@ polynomial::polynomial() {}
 
 polynomial::polynomial(int size){
 
-	srand(time(NULL));
 	for (int i = 0; i < size; i++) {
 		int randomNumber = rand()%10;
 		monomial monomialAux(randomNumber,i);
@@ -22,15 +21,25 @@ polynomial::polynomial(int size){
 	build();
 }
 
+polynomial::polynomial(std::vector<int> coef) {
+	for (int i = 0; i < coef.size(); i++) {
+		monomial monomialAux(coef[i],i);
+		monomials.push_back(monomialAux);
+	}
+	build();
+}
+
 polynomial::~polynomial() {}
 
 void polynomial::build(void) {
-	terms = 0;
+	terms = monomials.size();
 
+	/*
 	for (int i = 0; i < monomials.size(); i++) {
 		if (monomials[i].getCoeficient() != 0)
 			terms++;
 	}
+	*/
 	for (int i = monomials.size() - 1; i >= 0; i--){
 		if(monomials[i].getCoeficient() != 0) {
 			grade = i;
@@ -47,6 +56,29 @@ int polynomial::getTerms() const{
 	return terms;
 }
 
+//Divide un polinomio de tamaño > 2
+std::pair<polynomial, polynomial> polynomial::divide(void) {
+	std::pair<polynomial, polynomial> result;
+	int sizeLow = terms / 2;
+	int sizeHigh = ceil((double)terms / 2);
+	std::vector<int> low(sizeLow);
+	std::vector<int> high(sizeHigh);
+
+	if (sizeLow == 0)
+		throw "ERROR - Intentando dividir un polinomio de 1 término.\n";
+
+	for (int i = 0; i < sizeLow; i++) 
+		low[i] = monomials[i].getCoeficient();
+	for (int i = 0; i < sizeHigh; i++) 
+		high[i] = monomials[i + sizeLow].getCoeficient();
+		
+	polynomial polylow(low);
+	polynomial polyhigh(high);
+	result.first = polylow;
+	result.second = polyhigh;
+	return result;
+}
+
 std::vector<monomial> polynomial::getMonomials(void) const {
 	return monomials;
 }
@@ -59,4 +91,42 @@ std::ostream& operator<<(std::ostream &os, const polynomial &s) {
 			os << " + ";
 	}
 	return os;
+}
+
+polynomial operator+(const polynomial& firstPol, const polynomial& secondPol) {
+	if (firstPol.getTerms() != secondPol.getTerms())
+		throw "Error. Suma de polinimos de diferentes tamaños\n";
+
+	std::vector<int> sumCoef(firstPol.getTerms(), 0);
+	for (int i = 0; i < firstPol.getTerms(); i++) {
+		sumCoef[i] = firstPol.getMonomials()[i].getCoeficient() + 
+				secondPol.getMonomials()[i].getCoeficient();
+	}
+	polynomial polyFinal(sumCoef);
+	return polyFinal;
+}
+
+polynomial operator-(const polynomial& firstPol, const polynomial& secondPol) {
+	if (firstPol.getTerms() != secondPol.getTerms())
+		throw "Error. Resta de polinimos de diferentes tamaños\n";
+
+	std::vector<int> sumCoef(firstPol.getTerms(), 0);
+	for (int i = 0; i < firstPol.getTerms(); i++) {
+		sumCoef[i] = firstPol.getMonomials()[i].getCoeficient() - 
+				secondPol.getMonomials()[i].getCoeficient();
+	}
+	polynomial polyFinal(sumCoef);
+	return polyFinal;
+}
+
+polynomial operator*(const polynomial& firstPol, const int& exp) {
+	std::vector<int> multCoef(firstPol.getTerms() + exp);
+	for (int i = 0; i < exp; i++) {
+		multCoef[i] = 0;
+	}
+	for (int i = exp; i < (firstPol.getTerms() + exp); i++) {
+		multCoef[i] = firstPol.getMonomials()[i - exp].getCoeficient();
+	}
+	polynomial polyFinal(multCoef);
+	return polyFinal;
 }

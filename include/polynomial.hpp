@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <vector>
+#include <utility>
+#include <math.h>
 
 #include "monomial.hpp"
 
@@ -21,12 +23,20 @@ class polynomial {
 	public:
 		polynomial();
 		polynomial(int);
+		polynomial(std::vector<int>);
 		~polynomial();
 
 		int getGrade() const;
 		int getTerms() const;
+
+		std::pair<polynomial, polynomial> divide(void);
+
 		std::vector<monomial> getMonomials(void) const;
 
 };
 
 std::ostream& operator<<(std::ostream &os, const polynomial &s);
+polynomial operator+(const polynomial& firstPol, const polynomial& secondPol);
+polynomial operator-(const polynomial& firstPol, const polynomial& secondPol);
+polynomial operator*(const polynomial& firstPol, const int& exp);
+

@@ -29,3 +29,4 @@ std::ostream& operator<<(std::ostream &os, const monomial &s);
 std::istream& operator>>(std::istream &in, monomial &r);
 
 monomial operator+(const monomial &x, const monomial &y);
+monomial operator*(const monomial &x, const monomial &y);

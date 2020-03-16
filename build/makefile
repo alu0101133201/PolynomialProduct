@@ -1,17 +1,20 @@
 IDIR = ../include
 CC=g++
-CFLAGS=-I$(IDIR) -std=c++11 -g
+CFLAGS=-I$(IDIR) -std=c++17 -g
 
 ODIR=../src
 
 .PHONY: all
 
-_OBJ = classicalProduct.o polynomial.o monomial.o main.o
+_OBJ = dyVProduct.o classicalProduct.o polynomial.o monomial.o main.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 all: polynomials
 
+
+$(ODIR)/dyVProduct.o: $(ODIR)/DyVProduct.cpp $(IDIR)/DyVProduct.hpp $(IDIR)/product.hpp $(IDIR)/polynomial.hpp $(IDIR)/monomial.hpp
+		$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/classicalProduct.o: $(ODIR)/classicalProduct.cpp $(IDIR)/classicalProduct.hpp $(IDIR)/product.hpp $(IDIR)/polynomial.hpp $(IDIR)/monomial.hpp
 		$(CC) -c -o $@ $< $(CFLAGS)
