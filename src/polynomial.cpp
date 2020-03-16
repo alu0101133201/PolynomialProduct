@@ -83,8 +83,9 @@ void polynomial::extend(int toAdd) {
 	terms += toAdd;
 	int oldSize = monomials.size();
 	monomials.resize(oldSize + toAdd);
-	for (int i = oldSize - 1; i < monomials.size(); i++) {
+	for (int i = oldSize; i < monomials.size(); i++) {
 		monomials[i].setExponent(i);
+		monomials[i].setCoeficient(0);
 	}
 }
 
@@ -117,6 +118,7 @@ polynomial operator+(polynomial& firstPol, polynomial& secondPol) {
 				secondPol.getMonomials()[i].getCoeficient();
 	}
 	polynomial polyFinal(sumCoef);
+
 	return polyFinal;
 }
 
