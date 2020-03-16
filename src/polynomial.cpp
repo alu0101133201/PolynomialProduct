@@ -57,7 +57,7 @@ int polynomial::getTerms() const{
 }
 
 //Divide un polinomio de tamaño > 2
-std::pair<polynomial, polynomial> polynomial::divide(void) {
+std::pair<polynomial, polynomial> polynomial::divide(void) const {
 	std::pair<polynomial, polynomial> result;
 	int sizeLow = terms / 2;
 	int sizeHigh = ceil((double)terms / 2);
@@ -79,6 +79,15 @@ std::pair<polynomial, polynomial> polynomial::divide(void) {
 	return result;
 }
 
+void polynomial::extend(int toAdd) {
+	terms += toAdd;
+	int oldSize = monomials.size();
+	monomials.resize(oldSize + toAdd);
+	for (int i = oldSize - 1; i < monomials.size(); i++) {
+		monomials[i].setExponent(i);
+	}
+}
+
 std::vector<monomial> polynomial::getMonomials(void) const {
 	return monomials;
 }
@@ -93,9 +102,14 @@ std::ostream& operator<<(std::ostream &os, const polynomial &s) {
 	return os;
 }
 
-polynomial operator+(const polynomial& firstPol, const polynomial& secondPol) {
-	if (firstPol.getTerms() != secondPol.getTerms())
-		throw "Error. Suma de polinimos de diferentes tamaños\n";
+polynomial operator+(polynomial& firstPol, polynomial& secondPol) {
+	if (firstPol.getTerms() < secondPol.getTerms()) {
+		int diff = secondPol.getTerms() - firstPol.getTerms();
+		firstPol.extend(diff);
+	} else if (firstPol.getTerms() > secondPol.getTerms()) {
+		int diff = firstPol.getTerms() - secondPol.getTerms();
+		secondPol.extend(diff);
+	}
 
 	std::vector<int> sumCoef(firstPol.getTerms(), 0);
 	for (int i = 0; i < firstPol.getTerms(); i++) {
@@ -106,9 +120,14 @@ polynomial operator+(const polynomial& firstPol, const polynomial& secondPol) {
 	return polyFinal;
 }
 
-polynomial operator-(const polynomial& firstPol, const polynomial& secondPol) {
-	if (firstPol.getTerms() != secondPol.getTerms())
-		throw "Error. Resta de polinimos de diferentes tamaños\n";
+polynomial operator-(polynomial& firstPol, polynomial& secondPol) {
+	if (firstPol.getTerms() < secondPol.getTerms()) {
+		int diff = secondPol.getTerms() - firstPol.getTerms();
+		firstPol.extend(diff);
+	} else if (firstPol.getTerms() > secondPol.getTerms()) {
+		int diff = firstPol.getTerms() - secondPol.getTerms();
+		secondPol.extend(diff);
+	}
 
 	std::vector<int> sumCoef(firstPol.getTerms(), 0);
 	for (int i = 0; i < firstPol.getTerms(); i++) {
@@ -119,7 +138,7 @@ polynomial operator-(const polynomial& firstPol, const polynomial& secondPol) {
 	return polyFinal;
 }
 
-polynomial operator*(const polynomial& firstPol, const int& exp) {
+polynomial operator*(polynomial& firstPol, int exp) {
 	std::vector<int> multCoef(firstPol.getTerms() + exp);
 	for (int i = 0; i < exp; i++) {
 		multCoef[i] = 0;

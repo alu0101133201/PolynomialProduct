@@ -29,14 +29,16 @@ class polynomial {
 		int getGrade() const;
 		int getTerms() const;
 
-		std::pair<polynomial, polynomial> divide(void);
+		std::pair<polynomial, polynomial> divide(void) const;
+		void extend(int);
 
 		std::vector<monomial> getMonomials(void) const;
 
 };
 
 std::ostream& operator<<(std::ostream &os, const polynomial &s);
-polynomial operator+(const polynomial& firstPol, const polynomial& secondPol);
-polynomial operator-(const polynomial& firstPol, const polynomial& secondPol);
-polynomial operator*(const polynomial& firstPol, const int& exp);
+polynomial operator+(polynomial& firstPol, polynomial& secondPol);
+polynomial operator-(polynomial& firstPol, polynomial& secondPol);
+polynomial operator*(polynomial& firstPol, int exp);
+
 

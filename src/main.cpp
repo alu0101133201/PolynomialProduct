@@ -19,20 +19,32 @@ int main (int argc,	char* argv[]){
 	int length = atoi(argv[1]);
 	srand(time(NULL));
 
-	polynomial prueba(length);
-	polynomial prueba2(length);
+
+	std::vector<int> aa;
+	std::vector<int> bb;
+
+	aa.push_back(6);
+	aa.push_back(0);
+	aa.push_back(2);
+	bb.push_back(8);
+	bb.push_back(9);
+	bb.push_back(9);
+
+
+
+
+	polynomial prueba(aa);
+	polynomial prueba2(bb);
+	
 	product* punterillo;
 
 	try {
-		std::cout << prueba << "\n";
-		
+		punterillo = new classicalProduct;
+		std::cout << punterillo->polynomialProduct(aa,bb) << "\n";
 	
 
-
-		//punterillo = new classicalProduct;
-		//std::cout << punterillo->polynomialProduct(prueba,prueba2) << "\n";
-		//punterillo = new dyVProduct;
-		//punterillo->polynomialProduct(prueba,prueba2);
+		punterillo = new dyVProduct;
+		std::cout << punterillo->polynomialProduct(aa,bb) << "\n";
 
 
 	} catch (char const *e) {
